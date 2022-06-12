@@ -14,14 +14,20 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         //WindowSettings();
-        System.out.println("Enter  your path to folder");
+        System.out.println("Enter  your path to folder (The path must not have spaces)");
+
         Scanner sc = new Scanner(System.in);
         pathToDir = sc.next();
+
+        Path checkPath = Paths.get(pathToDir);
+        while (!Files.exists(checkPath)){
+            System.out.println("Enter  your path to folder (The path must not have spaces)");
+            pathToDir = sc.next();
+            checkPath = Paths.get(pathToDir);
+        }
+
         SearchFiles(pathToDir);
         System.out.println("Cleaning finished!");
-    }
-    public static void CheckFolderOnTrue(){
-
     }
     public static void SearchFiles(String path) throws IOException {
         File dir = new File(path);
